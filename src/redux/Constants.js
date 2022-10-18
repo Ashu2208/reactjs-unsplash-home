@@ -1,6 +1,8 @@
-export const BASE_URL = "https://api.unsplash.com/";
 export const ACCESS_KEY = "dqEI8J5GShfPzRPA-UaJJHNTlDXTQKfFDhaOPIpF-i0";
 export const SECRET_KEY = "MMdVBqvG4nyZsJGsaYx_iNRwhoG-bULWKTSM6ZN7Pyg";
+
+export const BASE_URL = "https://api.unsplash.com/";
+export const SEARCH_URL = "https://api.unsplash.com/search/photos";
 
 
 
