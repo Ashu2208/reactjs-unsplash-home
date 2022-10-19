@@ -5,11 +5,11 @@ import MainPage from './components/MainPage';
 import Footer from './components/Footer'
 function App() {
   return (
-    <>
+    <div className='appContainer'>
       <Header />
-      <MainPage />
-      <Footer />
-    </>
+      {/* <MainPage /> */}
+      {/* <Footer /> */}
+    </div>
   );
 }
 
