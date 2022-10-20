@@ -8,6 +8,8 @@
 .headerContainer {
   position: sticky;
   top: 0;
+  background-color: white;
+  z-index: 5;
 }
 
 .headerRow1 {
@@ -159,10 +161,11 @@
 }
 .arrowLeft,
 .arrowRight {
-  font-size: 28px;
   fill: gray;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  width: 30px;
+  height: 30px;
 }
 .arrowLeft:hover,
 .arrowRight:hover {
@@ -210,12 +213,15 @@
   position: absolute;
   width: 60px;
   height: 30px;
-  left: 245px;
+  left: 250px;
+  display: none;
 }
+
 .shadowRight {
   background: linear-gradient(90deg, transparent, white);
   position: absolute;
   width: 60px;
   height: 30px;
   right: 12px;
+  display: none;
 }

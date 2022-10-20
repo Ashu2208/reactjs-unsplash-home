@@ -1,0 +1,57 @@
+.searchModalContainer {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  border: 1px solid silver;
+  border-radius: 5px;
+  background-color: white;
+  width: 600px;
+  z-index: 1;
+  left: 85px;
+  display: none;
+}
+.trendSection {
+  margin: 15px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trendTitle {
+  font-size: 18px;
+}
+.trendItems {
+  display: flex;
+  flex-wrap: wrap;
+}
+.trendLogo {
+  fill: grey;
+  width: 20px;
+  height: 100%;
+  margin-right: 10px;
+}
+.trendItem {
+  display: flex;
+  text-decoration: none;
+  outline: none;
+  justify-content: center;
+  padding: 10px 15px;
+  margin: 5px;
+  height: 40px;
+  font-size: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  color: gray;
+  border: 1px solid silver;
+  transition: 0.2s all ease-in-out;
+  border-radius: 5px;
+}
+.trendItem:hover {
+  color: black;
+  background-color: whitesmoke;
+}
+.active {
+  display: block;
+}

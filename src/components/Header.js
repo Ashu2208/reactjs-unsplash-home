@@ -1,19 +1,31 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+
 import "./Header.css";
-import { MdSearch, MdNotifications, MdList } from "react-icons/md";
+import { MdSearch, MdList } from "react-icons/md";
 import { FaUserCircle, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { ReactComponent as VisualSearchIcon } from "../images/SearchLogo.svg";
 import { ReactComponent as NotifyIcon } from "../images/BailLogo.svg"
 import logo from "../images/unsplashLogo.png";
-import { imageCategory } from "./imageCategory";
-
+import SearchModel from '../components/models/SearchModel';
+import { getTopics, getTopicDetail } from "../redux/Actions"
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const topics = useSelector(state => state.topicsReducer.topics)
     const ref = useRef(null);
     const handleClick = (shift) => {
         ref.current.scrollLeft += +shift;
     };
+
+
+    useEffect(() => {
+        dispatch(getTopics())
+    }, [dispatch])
+    const openModal = () => {
+        document.querySelector(".searchModalContainer").classList.add("active");
+    }
+
 
 
     return (
@@ -24,7 +36,7 @@ const Header = () => {
                 </div>
                 <div className='searchContainer'>
                     <MdSearch className='headerSearchIcon' />
-                    <input className='searchTxt' placeholder='Search photos' />
+                    <input className='searchTxt' placeholder='Search photos' onClick={() => openModal()} />
                     <VisualSearchIcon className='headerVisualSearchIcon' />
                 </div>
                 <div className='headerMenuContainer'>
@@ -40,10 +52,13 @@ const Header = () => {
                     <MdList className='hamMenu' size={"40px"} color={"grey"} />
                 </div>
             </section>
+            {<SearchModel />}
 
-            <section className='headerRow2'>
+            <section className='headerRow2' >
                 <div className='mainLinks'>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="#" className='imageCategory'>Editorial</a>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="#" className='imageCategory'>Following</a>
                     <div className='hDivider'></div>
 
@@ -53,11 +68,14 @@ const Header = () => {
                 <div className='imageCategoryList' ref={ref}>
 
                     {
-                        imageCategory.map((item, index) => {
+                        topics?.map((item, index) => {
                             return (
                                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                <a href="#" key={index} className='imageCategory'>{item}</a>
-
+                                <div key={index} >
+                                    <div className='imageCategory' to={`/t/${item.slug}`} onClick={() => { dispatch(getTopicDetail(item)) }}>
+                                        {item.title}
+                                    </div>
+                                </div>
                             )
                         })
                     }
@@ -65,10 +83,10 @@ const Header = () => {
                 </div>
                 <div className='shadowRight'></div>
                 <FaAngleRight className='arrowRight' onClick={() => handleClick(150)} />
-            </section>
+            </section >
 
 
-        </div>
+        </div >
     )
 }
 

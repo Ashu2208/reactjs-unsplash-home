@@ -1,0 +1,62 @@
+.heroSectionContainer {
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  transition: 1s all ease-in-out;
+}
+
+.backShadow {
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.heroContent {
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topicDetail {
+  padding: 0px 20px;
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: textAnimate 0.2s;
+}
+@keyframes textAnimate {
+  0% {
+    transform: skew(10deg);
+  }
+  100% {
+  }
+}
+.topicTitle {
+  margin-bottom: 20px;
+  font-size: 48px;
+  color: white;
+}
+.topicDescription {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
+.topicSubmit {
+  margin-top: 30px;
+  font-size: 16px;
+  padding: 0px 16px;
+  max-width: fit-content;
+  height: 44px;
+  line-height: 42px;
+}
+.heroFooter {
+  padding: 0px 10px;
+  height: 50px;
+  /* background-color: inherit; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}

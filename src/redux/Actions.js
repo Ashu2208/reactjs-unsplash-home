@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_KEY, PHOTOS_URL, SEARCH_URL, LOAD_PHOTOS, SEARCH_PHOTOS, CLEAR_SEARCH_DATA, SEARCH_ERROR } from "./Constants";
+import { ACCESS_KEY, PHOTOS_URL, TOPICS_URL, GET_TOPIC_DETAIL, SEARCH_URL, GET_TOPICS, SEARCH_PHOTOS, CLEAR_SEARCH_DATA, SEARCH_ERROR } from "./Constants";
 
 
 
@@ -40,5 +40,24 @@ export const searchPhotos = (searchTxt, page) => {
 export const clearSearchData = () => {
     return {
         type: CLEAR_SEARCH_DATA
+    }
+}
+
+export const getTopics = () => {
+    return async (dispatch) => {
+        try {
+            let response = await axios.get(`${TOPICS_URL}?client_id=${ACCESS_KEY}&per_page=0`)
+            response = await response.data;
+            dispatch({ type: GET_TOPICS, payload: response })
+        } catch (err) {
+
+        }
+    }
+}
+
+export const getTopicDetail = (topicDetail) => {
+    return {
+        "type": GET_TOPIC_DETAIL,
+        "payload": topicDetail
     }
 }

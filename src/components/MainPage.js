@@ -13,7 +13,7 @@ const MainPage = () => {
     const [data, setData] = useState(photosData);
     const [searchTxt, setSearchTxt] = useState(null);
     const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
+    const hasMore = true;
 
     useEffect(() => {
         dispatch(searchPhotos(searchTxt, page))
@@ -35,8 +35,6 @@ const MainPage = () => {
             dispatch(clearSearchData())
         }
     }
-
-
     return (
         <div className="App flex">
             <input type="text" onKeyDown={(e) => searchImages(e)}
