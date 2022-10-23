@@ -13,7 +13,7 @@ export const TOPICS_URL = "https://api.unsplash.com/topics/";
 
 export const GET_TOPICS = "GET_TOPICS";
 export const GET_TOPIC_DETAIL = "GET_TOPIC_DETAIL";
-
+export const GET_RANDOM_TOPIC_PHOTO = "GET_RANDOM_TOPIC_PHOTO"
 export const LOAD_PHOTOS = "LOAD_PHOTOS";
 export const SEARCH_PHOTOS = "GET_PHOTOS";
 export const SEARCH_ERROR = "SEARCH_ERROR";

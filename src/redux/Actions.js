@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_KEY, PHOTOS_URL, TOPICS_URL, GET_TOPIC_DETAIL, SEARCH_URL, GET_TOPICS, SEARCH_PHOTOS, CLEAR_SEARCH_DATA, SEARCH_ERROR } from "./Constants";
+import { ACCESS_KEY, PHOTOS_URL, GET_RANDOM_TOPIC_PHOTO, TOPICS_URL, GET_TOPIC_DETAIL, RANDOM_PHOTOS_URL, SEARCH_URL, GET_TOPICS, SEARCH_PHOTOS, CLEAR_SEARCH_DATA, SEARCH_ERROR } from "./Constants";
 
 
 
@@ -18,17 +18,17 @@ import { ACCESS_KEY, PHOTOS_URL, TOPICS_URL, GET_TOPIC_DETAIL, SEARCH_URL, GET_T
 //     }
 // }
 
-export const searchPhotos = (searchTxt, page) => {
-    let query = (searchTxt === undefined)
+export const searchPhotos = (searchText, page) => {
+    let query = (searchText === undefined)
         ? `${PHOTOS_URL}/?client_id=${ACCESS_KEY}&page=${page}`
-        : `${SEARCH_URL}/?client_id=${ACCESS_KEY}&query=${searchTxt}&page=${page}`
+        : `${SEARCH_URL}/?client_id=${ACCESS_KEY}&query=${searchText}&page=${page}`
     return async (dispatch) => {
         try {
             let response = await axios.get(query);
             response = await response.data;
-            (searchTxt === undefined)
+            (searchText === undefined)
                 ? dispatch({ type: SEARCH_PHOTOS, payload: response })
-                : dispatch({ type: SEARCH_PHOTOS, payload: response.results })
+                : dispatch({ type: SEARCH_PHOTOS, payload: response.results, searchText })
 
         } catch (err) {
             console.log("Error, searchPhotos Action : ", err)
@@ -61,3 +61,37 @@ export const getTopicDetail = (topicDetail) => {
         "payload": topicDetail
     }
 }
+
+export const getRandomTopicPhoto = (topicDetail) => {
+    return async (dispatch) => {
+
+        try {
+            let query = `${RANDOM_PHOTOS_URL}/?client_id=${ACCESS_KEY}&topic=${topicDetail.title}`
+            let response = await axios.get(query);
+            response = await response.data;
+            dispatch({ type: GET_RANDOM_TOPIC_PHOTO, payload: response })
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const loadState = () => {
+    try {
+        const serializedState = localStorage.getItem('state');
+        if (serializedState === null) {
+            return undefined;
+        }
+        return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+}
+export const saveState = (state) => {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+    } catch {
+        // ignore write errors
+    }
+};

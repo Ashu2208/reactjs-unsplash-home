@@ -1,8 +1,9 @@
 .heroSectionContainer {
   width: 100%;
   height: 600px;
-  background-size: cover;
+  background-size: cover !important;
   transition: 1s all ease-in-out;
+  background-repeat: no-repeat !important;
 }
 
 .backShadow {
@@ -25,6 +26,7 @@
   flex-direction: column;
   align-items: flex-start;
   animation: textAnimate 0.2s;
+  text-shadow: 1px 1px 2px black;
 }
 @keyframes textAnimate {
   0% {
@@ -42,6 +44,10 @@
   font-size: 20px;
   margin-bottom: 20px;
   color: white;
+  line-clamp: 8;
+  max-width: 600px;
+  overflow: hidden;
+  line-height: 1.5;
 }
 .topicSubmit {
   margin-top: 30px;
@@ -59,4 +65,8 @@
   align-items: center;
   justify-content: space-between;
   color: white;
+}
+
+.heroFooter span {
+  cursor: pointer;
 }

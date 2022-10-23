@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
-import Header from './components/Header';
-import MainPage from './components/MainPage';
-import Footer from './components/Footer';
-import TopicHeroSection from './components/TopicHeroSection';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+
+const Header = lazy(() => import("./components/Header"));
+const TopicHeroSection = lazy(() => import("./components/TopicHeroSection"))
+const ImageListing = lazy(() => import("./components/ImageListing"));
+const Footer = lazy(() => import("./components/Footer"));
+
 
 function App() {
-  const topics = useSelector(state => state.topicsReducer.topics)
+
   return (
-    <Router>
-      <div className='appContainer'>
+    <div className='appContainer'>
+      <Suspense fallback={<div>Loading</div>}>
         <Header />
         <TopicHeroSection />
-        <MainPage />
+        <ImageListing />
         <Footer />
-      </div>
-    </Router>
+      </Suspense>
+    </div>
   );
 }
 

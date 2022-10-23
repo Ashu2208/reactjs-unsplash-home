@@ -21,7 +21,7 @@ const SearchModel = () => {
                         trendingSearches.map((item, index) => {
                             return (
                                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                <a className='trendItem' href='#'><TrendIcon className='trendLogo' />{item}</a>
+                                <a key={index} className='trendItem' href='#'><TrendIcon className='trendLogo' />{item}</a>
                             )
                         })
                     }
@@ -34,7 +34,7 @@ const SearchModel = () => {
                         trendingTopics.map((item, index) => {
                             return (
                                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                <a className='trendItem' href='#'>{item}</a>
+                                <a key={index} className='trendItem' href='#'>{item}</a>
                             )
                         })
                     }
@@ -47,7 +47,7 @@ const SearchModel = () => {
                         trendingCollections.map((item, index) => {
                             return (
                                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                <a className='trendItem' href='#'>{item}</a>
+                                <a key={index} className='trendItem' href='#'>{item}</a>
                             )
                         })
                     }

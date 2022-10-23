@@ -1,47 +1,38 @@
 import React from 'react';
-import "./mainPage.css";
+import "./imageListing.css";
 import { useState, useEffect } from "react"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from 'react-redux';
-import { searchPhotos, clearSearchData } from "../redux/Actions"
+import { searchPhotos } from "../redux/Actions";
 
 
 
-const MainPage = () => {
+const ImageListing = () => {
     const dispatch = useDispatch();
-    const photosData = useSelector(state => state.photoReducer.photos)
-    const [data, setData] = useState(photosData);
-    const [searchTxt, setSearchTxt] = useState(null);
+    const photosData = useSelector(state => state.photoReducer.photos);
+    const searchedText = useSelector(state => state.photoReducer.searchedText);
+    const [searchTxt, setSearchTxt] = useState(searchedText);
     const [page, setPage] = useState(1);
     const hasMore = true;
 
     useEffect(() => {
         dispatch(searchPhotos(searchTxt, page))
-    }, [searchTxt, page, dispatch])
+    }, [page, dispatch, searchTxt])
 
     useEffect(() => {
-        setData(photosData);
-    }, [photosData])
+        setSearchTxt(searchedText);
+    }, [photosData, searchedText])
 
 
-    const fetchImages = () => {
+    const fetchNextImages = () => {
         setPage(page + 1);
     }
 
-    const searchImages = (e) => {
-        if (e.keyCode === 13) {
-            setSearchTxt(e.target.value);
-            setData([]);
-            dispatch(clearSearchData())
-        }
-    }
     return (
         <div className="App flex">
-            <input type="text" onKeyDown={(e) => searchImages(e)}
-                placeholder="Search For Images" />
             <InfiniteScroll
-                dataLength={data.length}
-                next={() => fetchImages()}
+                dataLength={photosData.length}
+                next={() => fetchNextImages()}
                 hasMore={hasMore}
                 loader={<p>Load more...</p>}
                 endMessage={
@@ -52,7 +43,7 @@ const MainPage = () => {
             >
                 <div className="main flex">
                     {
-                        data.map((imgObj, index) => (
+                        photosData.map((imgObj, index) => (
                             <div className="container" key={index}>
                                 <img src={imgObj.urls.small} className="image" alt='userImage' />
                             </div>
@@ -66,7 +57,7 @@ const MainPage = () => {
     )
 }
 
-export default MainPage
+export default ImageListing
 
 
 
